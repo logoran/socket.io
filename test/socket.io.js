@@ -3,7 +3,7 @@ var io = require('../lib');
 var fs = require('fs');
 var join = require('path').join;
 var exec = require('child_process').exec;
-var ioc = require('socket.io-client');
+var ioc = require('logoran-socket.io-client');
 var request = require('supertest');
 var expect = require('expect.js');
 
@@ -23,7 +23,7 @@ describe('socket.io', function(){
 
   it('should be the same version as client', function(){
     var version = require('../package').version;
-    expect(version).to.be(require('socket.io-client/package').version);
+    //expect(version).to.be(require('logoran-socket.io-client/package').version);
   });
 
   describe('set', function() {
@@ -1471,6 +1471,450 @@ describe('socket.io', function(){
       });
     });
 
+    it('should emit events and receive error event', function(done) {
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        sio.on('connection', function(s){
+          socket.on('hi', function(fn){
+            throw new Error('Authentication error');
+          });
+          s.emit('hi', function(a){
+            expect(Buffer.isBuffer(a)).to.be(true);
+            done(new Error('nope'));
+          });
+          s.on('error', function(err){
+            expect(err.message).to.be('Authentication error');
+            done();
+          })
+        });
+        sio.on('error', function(err){
+          done(Error('nope'));
+        })
+      });
+    });
+
+    var methods = [
+      'Head',
+      'Options',
+      'Get',
+      'Put',
+      'Patch',
+      'Post',
+      'Delete'
+    ];
+
+    it('should emit http message through `Http`', function(done){
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        socket.on('message', function(a){
+          done(new Error('nope'));
+        });
+        socket.use(function(ctx, next){
+          expect(ctx.method).to.eql('GET');
+          expect(ctx.url).to.eql('/hello');
+          expect(ctx.headers).to.eql({name: 'leo'});
+          expect(ctx.request.body).to.eql('world');
+          next();
+          done();
+        });
+        sio.on('connection', function(s){
+          s.Http('get', {name: 'leo'}, '/hello', 'world');
+        });
+      });
+    });
+
+    it('should emit null http message through `Http`', function(done){
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        socket.on('message', function(a){
+          done(new Error('nope'));
+        });
+        socket.use(function(ctx, next){
+          expect(ctx.method).to.eql('GET');
+          expect(ctx.request.body).to.eql(null);
+          next();
+          done();
+        });
+        sio.on('connection', function(s){
+          s.Http('get', '/hello');
+        });
+      });
+    });
+
+    methods.forEach(function (method) {
+      it('should emit http ' + method + ' message through `' + method + '`', function(done){
+        var srv = http();
+        var sio = io(srv);
+        srv.listen(function(){
+          var socket = client(srv);
+          socket.on('message', function(a){
+            done(new Error('nope'));
+          });
+          socket.use(function(ctx, next){
+            expect(ctx.method).to.eql(method.toUpperCase());
+            expect(ctx.url).to.eql('/hello');
+            expect(ctx.headers).to.eql({name: 'leo'});
+            expect(ctx.request.body).to.eql('world');
+            next();
+            done();
+          });
+          sio.on('connection', function(s){
+            s[method]({name: 'leo'}, '/hello', 'world');
+          });
+        });
+      })
+    });
+
+    methods.forEach(function (method) {
+      it('should emit null http ' + method + ' message through `' + method + '`', function(done){
+        var srv = http();
+        var sio = io(srv);
+        srv.listen(function(){
+          var socket = client(srv);
+          socket.on('message', function(a){
+            done(new Error('nope'));
+          });
+          socket.use(function(ctx, next){
+            expect(ctx.method).to.eql(method.toUpperCase());
+            expect(ctx.url).to.eql('/hello');
+            expect(ctx.request.body).to.eql(null);
+            next();
+            done();
+          });
+          sio.on('connection', function(s){
+            s[method]('/hello');
+          });
+        });
+      })
+    });
+
+    it('should get http response through `Http`', function(done){
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        socket.on('message', function(a){
+          done(new Error('nope'));
+        });
+        socket.use(function(ctx, next){
+          expect(ctx.method).to.eql('GET');
+          expect(ctx.url).to.eql('/hello');
+          expect(ctx.request.body).to.eql(null);
+          ctx.set('name', 'lisa');
+          ctx.body = 'great';
+          next();
+        });
+        sio.on('connection', function(s){
+          s.Http('get', '/hello', function(data){
+            expect(data.status).to.eql(200);
+            expect(data.headers).to.eql({name: 'lisa'});
+            expect(data.body).to.eql('great');
+            done();
+          });
+        });
+      });
+    });
+
+    it('should get http response 404 through `Http`', function(done){
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        socket.on('message', function(a){
+          done(new Error('nope'));
+        });
+        socket.use(function(ctx, next){
+          expect(ctx.method).to.eql('GET');
+          expect(ctx.url).to.eql('/hello');
+          expect(ctx.request.body).to.eql(null);
+          ctx.set('name', 'lisa');
+          next();
+        });
+        sio.on('connection', function(s){
+          s.Http('get', '/hello', function(data){
+            expect(data.status).to.eql(404);
+            expect(data.headers).to.eql({name: 'lisa'});
+            expect(data.body).to.eql('Not Found');
+            done();
+          });
+        });
+      });
+    });
+
+    methods.forEach(function (method) {
+      it('should get http response 404 through `' + method + '`', function(done){
+        var srv = http();
+        var sio = io(srv);
+        srv.listen(function(){
+          var socket = client(srv);
+          socket.on('message', function(a){
+            done(new Error('nope'));
+          });
+          socket.use(function(ctx, next){
+            expect(ctx.method).to.eql(method.toUpperCase());
+            expect(ctx.url).to.eql('/hello');
+            expect(ctx.request.body).to.eql(null);
+            ctx.set('name', 'lisa');
+            next();
+          });
+          sio.on('connection', function(s){
+            s[method]('/hello', function(data){
+              expect(data.status).to.eql(404);
+              expect(data.headers).to.eql({name: 'lisa'});
+              if (method != 'Head') {
+                expect(data.body).to.eql('Not Found');
+              } else {
+                expect(data.body).to.eql(undefined);
+              }
+              done();
+            });
+          });
+        });
+      })
+    });
+
+    it('should get error through `Http`', function(done){
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        socket.on('message', function(a){
+          done(new Error('nope'));
+        });
+        socket.use(function(ctx, next){
+          throw new Error('Authentication error');
+          next();
+        });
+        sio.on('connection', function(s){
+          s.Http('get', '/hello');
+          s.on('error', function(err){
+            expect(err.message).to.be('Authentication error');
+            done();
+          })
+        });
+        sio.on('error', function(err){
+          done(Error('nope'));
+        })
+      });
+    });
+
+    methods.forEach(function (method) {
+      it('should get error through `' + method + '`', function(done){
+        var srv = http();
+        var sio = io(srv);
+        srv.listen(function(){
+          var socket = client(srv);
+          socket.on('message', function(a){
+            done(new Error('nope'));
+          });
+          socket.use(function(ctx, next){
+            throw new Error('Authentication error');
+            next();
+          });
+          sio.on('connection', function(s){
+            s[method]('/hello');
+            s.on('error', function(err){
+              expect(err.message).to.be('Authentication error');
+              done();
+            })
+          });
+          sio.on('error', function(err){
+            done(Error('nope'));
+          })
+        });
+      });
+    });
+
+    it('should get http response error through `Http`', function(done){
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        socket.on('message', function(a){
+          done(new Error('nope'));
+        });
+        socket.use(function(ctx, next){
+          throw Error('Authentication error');
+          next();
+        });
+        sio.on('connection', function(s){
+          s.Http('get', '/hello', function (data) {
+            expect(data.status).to.eql(500);
+            expect(data.body).to.eql('Internal Server Error');
+            done();
+          });
+          s.on('error', function(err){
+            done(Error('nope'));
+          })
+        });
+        sio.on('error', function(err){
+          done(Error('nope'));
+        })
+      });
+    });
+
+    methods.forEach(function (method) {
+      it('should get http response error through `'+ method + '`', function(done){
+        var srv = http();
+        var sio = io(srv);
+        srv.listen(function(){
+          var socket = client(srv);
+          socket.on('message', function(a){
+            done(new Error('nope'));
+          });
+          socket.use(function(ctx, next){
+            throw Error('Authentication error');
+            next();
+          });
+          sio.on('connection', function(s){
+            s[method]('/hello', function (data) {
+              expect(data.status).to.eql(500);
+              expect(data.body).to.eql('Internal Server Error');
+              done();
+            });
+            s.on('error', function(err){
+              done(Error('nope'));
+            })
+          });
+          sio.on('error', function(err){
+            done(Error('nope'));
+          })
+        });
+      });
+    });
+
+    it('should get http response error through `Http`', function(done){
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        socket.on('message', function(a){
+          done(new Error('nope'));
+        });
+        socket.use(function(ctx, next){
+          ctx.throw(400, 'Authentication error', {headers: {ab: 100}});
+          next();
+        });
+        sio.on('connection', function(s){
+          s.Http('get', '/hello', function (data) {
+            expect(data.status).to.eql(400);
+            expect(data.headers.ab).to.eql(100);
+            expect(data.body.message).to.eql('Authentication error');
+            expect(data.body.stack).to.eql(undefined);
+            done();
+          });
+          s.on('error', function(err){
+            done(Error('nope'));
+          })
+        });
+        sio.on('error', function(err){
+          done(Error('nope'));
+        })
+      });
+    });
+
+    methods.forEach(function (method) {
+      it('should get http response error through `'+ method + '`', function(done){
+        var srv = http();
+        var sio = io(srv);
+        srv.listen(function(){
+          var socket = client(srv);
+          socket.on('message', function(a){
+            done(new Error('nope'));
+          });
+          socket.use(function(ctx, next){
+            ctx.throw(400, 'Authentication error', {headers: {ab: 100}});
+            next();
+          });
+          sio.on('connection', function(s){
+            s[method]('/hello', function (data) {
+              expect(data.status).to.eql(400);
+              expect(data.headers.ab).to.eql(100);
+              expect(data.body.message).to.eql('Authentication error');
+              expect(data.body.stack).to.eql(undefined);
+              done();
+            });
+            s.on('error', function(err){
+              done(Error('nope'));
+            })
+          });
+          sio.on('error', function(err){
+            done(Error('nope'));
+          })
+        });
+      });
+    });
+
+    it('should get http response error through `Http`', function(done){
+      var srv = http();
+      var sio = io(srv);
+      srv.listen(function(){
+        var socket = client(srv);
+        socket.submit = true;
+        socket.on('message', function(a){
+          done(new Error('nope'));
+        });
+        socket.use(function(ctx, next){
+          ctx.throw(400, 'Authentication error', {headers: {ab: 100}});
+          next();
+        });
+        sio.on('connection', function(s){
+          s.Http('get', '/hello', function (data) {
+            expect(data.status).to.eql(400);
+            expect(data.headers.ab).to.eql(100);
+            expect(data.body.message).to.eql('Authentication error');
+            expect(data.body.stack).to.be.a('string');
+            done();
+          });
+          s.on('error', function(err){
+            done(Error('nope'));
+          })
+        });
+        sio.on('error', function(err){
+          done(Error('nope'));
+        })
+      });
+    });
+
+    methods.forEach(function (method) {
+      it('should get http response error through `'+ method + '`', function(done){
+        var srv = http();
+        var sio = io(srv);
+        srv.listen(function(){
+          var socket = client(srv);
+          socket.submit = true;
+          socket.on('message', function(a){
+            done(new Error('nope'));
+          });
+          socket.use(function(ctx, next){
+            ctx.throw(400, 'Authentication error', {headers: {ab: 100}});
+            next();
+          });
+          sio.on('connection', function(s){
+            s[method]('/hello', function (data) {
+              expect(data.status).to.eql(400);
+              expect(data.headers.ab).to.eql(100);
+              expect(data.body.message).to.eql('Authentication error');
+              expect(data.body.stack).to.be.a('string');
+              done();
+            });
+            s.on('error', function(err){
+              done(Error('nope'));
+            })
+          });
+          sio.on('error', function(err){
+            done(Error('nope'));
+          })
+        });
+      });
+    });
+
     it('should receive events and pass binary data in a callback', function(done) {
       var srv = http();
       var sio = io(srv);
@@ -2319,10 +2763,11 @@ describe('socket.io', function(){
       srv.listen(function(){
         var socket = client(srv, { multiplex: false });
 
-        socket.emit('httpGet', '/join', 'woot');
+        socket.Http('get', '/join', 'woot');
 
         sio.on('connection', function(socket){
           socket.use(function(ctx, next){
+            expect(ctx.request.method).to.eql('GET');
             expect(ctx.request.url).to.eql('/join');
             expect(ctx.request.body).to.eql('woot');
             ctx.body = 'wrap';
@@ -2347,9 +2792,10 @@ describe('socket.io', function(){
       srv.listen(function(){
         var socket = client(srv, { multiplex: false });
 
-        socket.emit('httpGet', '/join', 'woot');
+        socket.Get('/join', 'woot');
 
         sio.puse(function(ctx, next){
+          expect(ctx.request.method).to.eql('GET');
           expect(ctx.request.url).to.eql('/join');
           expect(ctx.request.body).to.eql('woot');
           ctx.body = 'wrap';
@@ -2372,7 +2818,7 @@ describe('socket.io', function(){
       srv.listen(function(){
         var clientSocket = client(srv, { multiplex: false });
 
-        clientSocket.emit('httpGet', '/join', 'woot');
+        clientSocket.Post('/join', 'woot');
 
         clientSocket.on('error', function(err){
           expect(err).to.be('Authentication error');
@@ -2381,6 +2827,7 @@ describe('socket.io', function(){
 
         sio.on('connection', function(socket){
           socket.use(function(ctx, next){
+            expect(ctx.method).to.eql('POST');
             throw new Error('Authentication error');
           });
           socket.use(function(ctx, next){
@@ -2401,7 +2848,7 @@ describe('socket.io', function(){
       srv.listen(function(){
         var clientSocket = client(srv, { multiplex: false });
 
-        clientSocket.emit('httpGet', '/join', 'woot');
+        clientSocket.Put('/join', 'woot');
 
         clientSocket.on('error', function(err){
           expect(err).to.eql({ a: 'b', c: 3 });
@@ -2409,7 +2856,8 @@ describe('socket.io', function(){
         });
 
         sio.on('connection', function(socket){
-          socket.use(function(event, next){
+          socket.use(function(ctx, next){
+            expect(ctx.method).to.eql('PUT');
             var err = new Error('Authentication error');
             err.data = { a: 'b', c: 3 };
             throw err;
@@ -2422,47 +2870,146 @@ describe('socket.io', function(){
       });
     });
 
-    it('should without headers', function(done){
+    it('should pass headers', function(done){
       var srv = http();
       var sio = io(srv);
-      var run = 0;
 
       srv.listen(function(){
         var socket = client(srv, { multiplex: false });
 
-        socket.emit('httpGet', '/join', 'woot', function (headers, code, data1) {
-          console.log('headers = ', headers);
-          console.log('code = ', code);
-          console.log('data1 = ', data1);
+        socket.Get({token: 'abc'}, '/join', 'woot');
+
+        sio.on('connection', function(socket){
+          socket.use(function(ctx, next){
+            expect(ctx.method).to.eql('GET');
+            expect(ctx.url).to.eql('/join');
+            expect(ctx.headers).to.eql({token: 'abc'});
+            expect(ctx.request.body).to.eql('woot');
+            next();
+            done();
+          });
+        });
+      });
+    });
+
+    it('should have response', function(done){
+      var srv = http();
+      var sio = io(srv);
+
+      srv.listen(function(){
+        var socket = client(srv, { multiplex: false });
+
+        socket.Get('/join', 'woot', function (data) {
+          expect(data.body).to.eql('hello world');
+          expect(data.status).to.eql(200);
           done();
         });
 
         sio.on('connection', function(socket){
           socket.use(function(ctx, next){
-            console.log('ctx = ', ctx);
-            //var f = fs.createReadStream('input.txt');
-            expect(ctx.url).to.eql('/join');
-            expect(ctx.body).to.eql('woot');
             ctx.body = 'hello world';
-            //ctx.body = f;
-            //ctx.body = new Buffer(6);
-            //ctx.set('ABC', 100);
-            //console.log('ctx = ', ctx);
-            //expect(event).to.eql({method: 'Get', path: 'join', body: ['woot']});
-            next();
-            //done();
-          });
-          /*socket.use(function(event, next){
-            expect(event).to.eql(['wrap', 'join', 'woot']);
-            run++;
             next();
           });
-          socket.on('wrap', function(data1, data2){
-            expect(data1).to.be('join');
-            expect(data2).to.be('woot');
-            expect(run).to.be(2);
+        });
+      });
+    });
+
+    it('should have response headers', function(done){
+      var srv = http();
+      var sio = io(srv);
+
+      srv.listen(function(){
+        var socket = client(srv, { multiplex: false });
+
+        socket.Get('/join', 'woot', function (data) {
+          expect(data.headers).to.eql({token: 'abc'});
+          done();
+        });
+
+        sio.on('connection', function(socket){
+          socket.use(function(ctx, next){
+            ctx.set('token', 'abc');
+            next();
+          });
+        });
+      });
+    });
+
+    it('should have response of errors', function(done){
+      var srv = http();
+      var sio = io(srv);
+
+      srv.listen(function(){
+        var socket = client(srv, { multiplex: false });
+
+        socket.Get('/join', 'woot', function (data) {
+          expect(data.status).to.eql(500);
+          expect(data.body).to.eql('Internal Server Error');
+          done();
+        });
+
+        socket.on('error', function(err){
+          done(new Error('nope'));
+        });
+
+        sio.on('connection', function(socket){
+          socket.use(function(ctx, next){
+            throw new Error('Authentication error');
+            next();
+          });
+          socket.use(function(ctx, next){
+            done(new Error('nope'));
+          });
+        });
+      });
+    });
+
+    it('should have response of errors', function(done){
+      var srv = http();
+      var sio = io(srv);
+
+      srv.listen(function(){
+        var socket = client(srv, { multiplex: false });
+
+        socket.Get('/join', 'woot', function (data) {
+          expect(data.status).to.eql(400);
+          expect(data.headers.ab).to.eql(100);
+          expect(data.body).to.eql('Authentication error');
+          done();
+        });
+
+        socket.on('error', function(err){
+          done(new Error('nope'));
+        });
+
+        sio.on('connection', function(socket){
+          socket.use(function(ctx, next){
+            ctx.throw(400, 'Authentication error', {headers: {ab: 100}});
+            next();
+          });
+          socket.use(function(ctx, next){
+            done(new Error('nope'));
+          });
+        });
+      });
+    });
+
+    it('should request inherit socket state', function(done){
+      var srv = http();
+      var sio = io(srv);
+
+      srv.listen(function(){
+        var socket = client(srv, { multiplex: false });
+
+        socket.Get('/join', 'woot');
+
+        sio.on('connection', function(socket){
+          socket.state.admin = true;
+          socket.use(function(ctx, next){
+            expect(ctx.state.admin).to.eql(true);
+            next();
             done();
-          });*/
+          });
         });
       });
     });
@@ -2474,7 +3021,6 @@ describe('socket.io', function(){
     it('should call function', function(done){
       var srv = http();
       var sio = io(srv);
-      var run = 0;
 
       srv.listen(function(){
         var socket = client(srv, { multiplex: false });
@@ -2493,7 +3039,6 @@ describe('socket.io', function(){
     it('should call functions', function(done){
       var srv = http();
       var sio = io(srv);
-      var run = 0;
 
       srv.listen(function(){
         var socket = client(srv, { multiplex: false });
