@@ -23,7 +23,7 @@ describe('socket.io', function(){
 
   it('should be the same version as client', function(){
     var version = require('../package').version;
-    //expect(version).to.be(require('logoran-socket.io-client/package').version);
+    expect(version).to.be(require('logoran-socket.io-client/package').version);
   });
 
   describe('set', function() {
