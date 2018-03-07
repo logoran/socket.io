@@ -12,8 +12,8 @@
     "component-emitter": "^1.2.1",
     "express": "^4.15.2",
     "schemapack": "^1.4.2",
-    "socket.io": "socketio/socket.io",
-    "socket.io-client": "socketio/socket.io-client",
+    "logoran-socket.io": "logoran/logoran-socket.io",
+    "logoran-socket.io-client": "logoran/logoran-socket.io-client",
     "socket.io-json-parser": "^1.0.0",
     "socket.io-msgpack-parser": "^1.0.0",
     "webpack": "^2.4.1"

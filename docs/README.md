@@ -8,7 +8,7 @@
 #### API Reference
 
   - [Server API](API.md)
-  - [Client API](https://github.com/socketio/socket.io-client/blob/master/docs/API.md)
+  - [Client API](https://github.com/logoran/socket.io-client/blob/master/docs/API.md)
 
 #### Advanced topics
 

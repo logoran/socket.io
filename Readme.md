@@ -1,20 +1,20 @@
 
 # socket.io
 
-[![Backers on Open Collective](https://opencollective.com/socketio/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/socketio/sponsors/badge.svg)](#sponsors)
-[![Build Status](https://secure.travis-ci.org/socketio/socket.io.svg?branch=master)](https://travis-ci.org/socketio/socket.io)
-[![Dependency Status](https://david-dm.org/socketio/socket.io.svg)](https://david-dm.org/socketio/socket.io)
-[![devDependency Status](https://david-dm.org/socketio/socket.io/dev-status.svg)](https://david-dm.org/socketio/socket.io#info=devDependencies)
+[![Backers on Open Collective](https://opencollective.com/logoran/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/logoran/sponsors/badge.svg)](#sponsors)
+[![Build Status](https://secure.travis-ci.org/logoran/socket.io.svg?branch=master)](https://travis-ci.org/logoran/socket.io)
+[![Dependency Status](https://david-dm.org/logoran/socket.io.svg)](https://david-dm.org/logoran/socket.io)
+[![devDependency Status](https://david-dm.org/logoran/socket.io/dev-status.svg)](https://david-dm.org/logoran/socket.io#info=devDependencies)
 [![NPM version](https://badge.fury.io/js/socket.io.svg)](https://www.npmjs.com/package/socket.io)
 ![Downloads](https://img.shields.io/npm/dm/socket.io.svg?style=flat)
-[![](https://slackin-socketio.now.sh/badge.svg)](https://slackin-socketio.now.sh)
+[![](https://slackin-logoran.now.sh/badge.svg)](https://slackin-logoran.now.sh)
 
 ## Features
 
 Socket.IO enables real-time bidirectional event-based communication. It consists in:
 
 - a Node.js server (this repository)
-- a [Javascript client library](https://github.com/socketio/socket.io-client) for the browser (or a Node.js client)
+- a [Javascript client library](https://github.com/logoran/socket.io-client) for the browser (or a Node.js client)
 
 Some implementations in other languages are also available:
 
@@ -34,7 +34,7 @@ For this purpose, it relies on [Engine.IO](https://github.com/socketio/engine.io
 
 #### Auto-reconnection support
 
-Unless instructed otherwise a disconnected client will try to reconnect forever, until the server is available again. Please see the available reconnection options [here](https://github.com/socketio/socket.io-client/blob/master/docs/API.md#new-managerurl-options).
+Unless instructed otherwise a disconnected client will try to reconnect forever, until the server is available again. Please see the available reconnection options [here](https://github.com/logoran/socket.io-client/blob/master/docs/API.md#new-managerurl-options).
 
 #### Disconnection detection
 
@@ -167,74 +167,74 @@ The `gulp` task `test` will always transpile the source code into es5 and export
 
 ## Backers
 
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/socketio#backer)]
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/logoran#backer)]
 
-<a href="https://opencollective.com/socketio/backer/0/website" target="_blank"><img src="https://opencollective.com/socketio/backer/0/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/1/website" target="_blank"><img src="https://opencollective.com/socketio/backer/1/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/2/website" target="_blank"><img src="https://opencollective.com/socketio/backer/2/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/3/website" target="_blank"><img src="https://opencollective.com/socketio/backer/3/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/4/website" target="_blank"><img src="https://opencollective.com/socketio/backer/4/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/5/website" target="_blank"><img src="https://opencollective.com/socketio/backer/5/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/6/website" target="_blank"><img src="https://opencollective.com/socketio/backer/6/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/7/website" target="_blank"><img src="https://opencollective.com/socketio/backer/7/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/8/website" target="_blank"><img src="https://opencollective.com/socketio/backer/8/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/9/website" target="_blank"><img src="https://opencollective.com/socketio/backer/9/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/10/website" target="_blank"><img src="https://opencollective.com/socketio/backer/10/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/11/website" target="_blank"><img src="https://opencollective.com/socketio/backer/11/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/12/website" target="_blank"><img src="https://opencollective.com/socketio/backer/12/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/13/website" target="_blank"><img src="https://opencollective.com/socketio/backer/13/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/14/website" target="_blank"><img src="https://opencollective.com/socketio/backer/14/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/15/website" target="_blank"><img src="https://opencollective.com/socketio/backer/15/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/16/website" target="_blank"><img src="https://opencollective.com/socketio/backer/16/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/17/website" target="_blank"><img src="https://opencollective.com/socketio/backer/17/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/18/website" target="_blank"><img src="https://opencollective.com/socketio/backer/18/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/19/website" target="_blank"><img src="https://opencollective.com/socketio/backer/19/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/20/website" target="_blank"><img src="https://opencollective.com/socketio/backer/20/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/21/website" target="_blank"><img src="https://opencollective.com/socketio/backer/21/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/22/website" target="_blank"><img src="https://opencollective.com/socketio/backer/22/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/23/website" target="_blank"><img src="https://opencollective.com/socketio/backer/23/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/24/website" target="_blank"><img src="https://opencollective.com/socketio/backer/24/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/25/website" target="_blank"><img src="https://opencollective.com/socketio/backer/25/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/26/website" target="_blank"><img src="https://opencollective.com/socketio/backer/26/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/27/website" target="_blank"><img src="https://opencollective.com/socketio/backer/27/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/28/website" target="_blank"><img src="https://opencollective.com/socketio/backer/28/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/backer/29/website" target="_blank"><img src="https://opencollective.com/socketio/backer/29/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/0/website" target="_blank"><img src="https://opencollective.com/logoran/backer/0/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/1/website" target="_blank"><img src="https://opencollective.com/logoran/backer/1/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/2/website" target="_blank"><img src="https://opencollective.com/logoran/backer/2/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/3/website" target="_blank"><img src="https://opencollective.com/logoran/backer/3/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/4/website" target="_blank"><img src="https://opencollective.com/logoran/backer/4/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/5/website" target="_blank"><img src="https://opencollective.com/logoran/backer/5/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/6/website" target="_blank"><img src="https://opencollective.com/logoran/backer/6/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/7/website" target="_blank"><img src="https://opencollective.com/logoran/backer/7/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/8/website" target="_blank"><img src="https://opencollective.com/logoran/backer/8/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/9/website" target="_blank"><img src="https://opencollective.com/logoran/backer/9/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/10/website" target="_blank"><img src="https://opencollective.com/logoran/backer/10/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/11/website" target="_blank"><img src="https://opencollective.com/logoran/backer/11/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/12/website" target="_blank"><img src="https://opencollective.com/logoran/backer/12/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/13/website" target="_blank"><img src="https://opencollective.com/logoran/backer/13/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/14/website" target="_blank"><img src="https://opencollective.com/logoran/backer/14/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/15/website" target="_blank"><img src="https://opencollective.com/logoran/backer/15/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/16/website" target="_blank"><img src="https://opencollective.com/logoran/backer/16/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/17/website" target="_blank"><img src="https://opencollective.com/logoran/backer/17/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/18/website" target="_blank"><img src="https://opencollective.com/logoran/backer/18/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/19/website" target="_blank"><img src="https://opencollective.com/logoran/backer/19/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/20/website" target="_blank"><img src="https://opencollective.com/logoran/backer/20/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/21/website" target="_blank"><img src="https://opencollective.com/logoran/backer/21/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/22/website" target="_blank"><img src="https://opencollective.com/logoran/backer/22/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/23/website" target="_blank"><img src="https://opencollective.com/logoran/backer/23/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/24/website" target="_blank"><img src="https://opencollective.com/logoran/backer/24/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/25/website" target="_blank"><img src="https://opencollective.com/logoran/backer/25/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/26/website" target="_blank"><img src="https://opencollective.com/logoran/backer/26/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/27/website" target="_blank"><img src="https://opencollective.com/logoran/backer/27/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/28/website" target="_blank"><img src="https://opencollective.com/logoran/backer/28/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/backer/29/website" target="_blank"><img src="https://opencollective.com/logoran/backer/29/avatar.svg"></a>
 
 
 ## Sponsors
 
-Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/socketio#sponsor)]
+Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/logoran#sponsor)]
 
-<a href="https://opencollective.com/socketio/sponsor/0/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/1/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/2/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/3/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/4/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/5/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/6/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/7/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/8/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/9/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/9/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/10/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/10/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/11/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/11/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/12/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/12/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/13/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/13/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/14/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/14/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/15/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/15/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/16/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/16/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/17/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/17/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/18/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/18/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/19/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/19/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/20/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/20/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/21/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/21/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/22/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/22/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/23/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/23/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/24/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/24/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/25/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/25/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/26/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/26/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/27/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/27/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/28/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/28/avatar.svg"></a>
-<a href="https://opencollective.com/socketio/sponsor/29/website" target="_blank"><img src="https://opencollective.com/socketio/sponsor/29/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/0/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/1/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/2/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/3/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/4/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/5/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/6/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/7/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/8/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/9/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/10/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/10/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/11/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/11/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/12/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/12/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/13/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/13/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/14/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/14/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/15/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/15/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/16/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/16/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/17/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/17/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/18/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/18/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/19/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/19/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/20/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/20/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/21/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/21/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/22/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/22/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/23/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/23/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/24/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/24/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/25/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/25/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/26/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/26/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/27/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/27/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/28/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/28/avatar.svg"></a>
+<a href="https://opencollective.com/logoran/sponsor/29/website" target="_blank"><img src="https://opencollective.com/logoran/sponsor/29/avatar.svg"></a>
 
 
 ## License
