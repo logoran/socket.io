@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "express": "4.9.x",
-    "socket.io": "latest"
+    "logoran-socket.io": "latest"
   },
   "scripts": {
     "start": "node index"

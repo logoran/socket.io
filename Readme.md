@@ -93,7 +93,7 @@ HTTP server listening on port `3000`.
 
 ```js
 var server = require('http').createServer();
-var io = require('socket.io')(server);
+var io = require('logoran-socket.io')(server);
 io.on('connection', function(client){
   client.on('event', function(data){});
   client.on('disconnect', function(){});
@@ -104,7 +104,7 @@ server.listen(3000);
 ### Standalone
 
 ```js
-var io = require('socket.io')();
+var io = require('logoran-socket.io')();
 io.on('connection', function(client){});
 io.listen(3000);
 ```
@@ -119,7 +119,7 @@ function. Also make sure to call `.listen` on the `server`, not the `app`.
 ```js
 var app = require('express')();
 var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+var io = require('logoran-socket.io')(server);
 io.on('connection', function(){ /* … */ });
 server.listen(3000);
 ```
@@ -132,7 +132,7 @@ handler function, but only by calling the `callback` method.
 ```js
 var app = require('koa')();
 var server = require('http').createServer(app.callback());
-var io = require('socket.io')(server);
+var io = require('logoran-socket.io')(server);
 io.on('connection', function(){ /* … */ });
 server.listen(3000);
 ```

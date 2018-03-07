@@ -1,5 +1,5 @@
 var server = require('http').createServer();
-var ioc = require('socket.io-client');
+var ioc = require('logoran-socket.io-client');
 var io = require('../..')(server);
 
 var srv = server.listen(function() {
