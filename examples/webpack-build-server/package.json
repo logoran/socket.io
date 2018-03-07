@@ -9,7 +9,7 @@
   "author": "Damien Arrachequesne",
   "license": "MIT",
   "devDependencies": {
-    "socket.io": "^2.0.3",
+    "logoran-socket.io": "^1.1.3",
     "webpack": "^2.6.1"
   }
 }
